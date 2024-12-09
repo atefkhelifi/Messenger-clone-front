@@ -1,0 +1,67 @@
+<body>
+  <div class="main">
+    <input
+      type="checkbox"
+      (change)="onCheckboxChange($event)"
+      id="chk"
+      aria-hidden="true"
+      #checkbox
+    />
+    <div class="signup">
+      <form>
+        <label (change)="onCheckboxChange($event)" for="chk" aria-hidden="true"
+          >Sign up</label
+        >
+        <input
+          type="text"
+          name="txt"
+          placeholder="User name"
+          [(ngModel)]="name"
+          required=""
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          required=""
+        />
+
+        <input
+          type="password"
+          name="pswd"
+          placeholder="Password"
+          [(ngModel)]="password"
+          required=""
+        />
+        <button (click)="signUp()">Sign up</button>
+      </form>
+    </div>
+
+    <div class="login">
+      <form>
+        <label (change)="onCheckboxChange($event)" for="chk" aria-hidden="true"
+          >Login</label
+        >
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="loginEmail"
+          placeholder="Email"
+          required=""
+        />
+        <input
+          type="password"
+          name="pswd"
+          placeholder="Password"
+          [(ngModel)]="loginPassword"
+          required=""
+        />
+        <button (click)="signIn()">Login</button>
+        <div class="col-12">
+          <small class="p-error"> {{ authMessage }} </small>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
