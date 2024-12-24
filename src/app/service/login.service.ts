@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class LoginService {
   apiUrlUsers = environment.apiUrl + 'users';
+  apiUrlConversations = environment.apiUrl + 'conversations';
 
   constructor(private http: HttpClient) {}
   createUser(user: any): Observable<any> {
@@ -21,5 +22,27 @@ export class LoginService {
   }
   getUserById(idUser: any): Observable<any> {
     return this.http.get<any>(this.apiUrlUsers + '/' + idUser);
+  }
+  getUsers(): Observable<any> {
+    return this.http.get<any>(this.apiUrlUsers);
+  }
+  getMyConversations(idUser: any): Observable<any> {
+    return this.http.get<any>(
+      this.apiUrlConversations + '/my-conversations/' + idUser
+    );
+  }
+  getConversationById(idConversation: any): Observable<any> {
+    return this.http.get<any>(this.apiUrlConversations + '/' + idConversation);
+  }
+  getPaticipants(idConversation: any): Observable<any> {
+    return this.http.get<any>(
+      this.apiUrlConversations + '/participants/' + idConversation
+    );
+  }
+  startConversation(discussion: any): Observable<any> {
+    return this.http.post<any>(
+      this.apiUrlConversations + '/create',
+      discussion
+    );
   }
 }

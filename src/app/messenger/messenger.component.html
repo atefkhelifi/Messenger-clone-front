@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="app">
+    <div class="head clearfix">
+      <span class="messages-notification">
+        <i class="fa fa-comments-o"></i>
+        <span class="count">2</span>
+      </span>
+      <span class="title">Messenger</span>
+      <span class="create-new">
+        <i class="fa fa-pencil-square-o"></i>
+      </span>
+    </div>
+
+    <div class="search-bar">
+      <i class="fa fa-search"></i>
+      <input type="text" class="ip-search" placeholder="Search" />
+    </div>
+
+    <div class="body">
+      <div class="friend-list clearfix">
+        <ul *ngFor="let conversation of conversations">
+          <li (click)="getConversationById(conversation.id)">
+            <span class="messages">
+              <span class="count">1</span>
+            </span>
+            <img src="userImg.jpg" alt="" />
+            <span class="name">
+              {{ conversation.participants[1].name }}
+              <span class="status"> Active 2h ago </span>
+            </span>
+          </li>
+
+          <!-- <li class="active">
+            <span class="messages hide">
+              <span class="count"></span>
+            </span>
+            <img src="https://s5.postimg.cc/nttv7ii3n/image.png" alt="" />
+            <span class="name">
+              Emma
+              <span class="status"> Active 2 mins ago </span>
+            </span>
+          </li> -->
+        </ul>
+      </div>
+
+      <div class="chat-messages">
+        <div class="chat">
+          <div
+            class="chat-content clearfix"
+            style="height: 258px; overflow: auto"
+            id="messages"
+          >
+            <span
+              class="friend last"
+              *ngFor="let message of messages"
+              [ngClass]="
+                message.senderId == idConnected ? 'you first' : 'friend last'
+              "
+            >
+              {{ message.content }}
+              <span class="time">
+                {{ message.timestamp | date : "shortTime" }}
+              </span>
+            </span>
+            <!-- <span class="you first">
+              Hi, I am fine. How about you?
+              <span class="time"> 7:31 PM </span>
+            </span>
+            <span class="you last">
+              lets meet, this sunday!
+              <span class="time"> 7:31 PM </span>
+            </span>
+            <span class="friend last">
+              Hi, How are You?
+              <span class="time"> 7:30 PM </span>
+            </span> -->
+          </div>
+
+          <div class="msg-box">
+            <input
+              type="text"
+              class="ip-msg"
+              placeholder="type something.."
+              [(ngModel)]="message"
+            />
+            <span class="btn-group">
+              <i class="bi bi-send" (click)="sendMessage()"></i>
+              <!-- <i class="bi bi-paperclip"></i> -->
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
