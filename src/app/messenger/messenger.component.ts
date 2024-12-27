@@ -25,6 +25,8 @@ export class MessengerComponent implements OnInit, OnDestroy {
   idConnected: any;
   message: any;
   otherUser: any;
+  searchTerm: string = '';
+  filteredUsers: any;
   constructor(
     private logiService: LoginService,
     private localStorage: LocalStorageService,
@@ -36,10 +38,16 @@ export class MessengerComponent implements OnInit, OnDestroy {
       this.getConversationById(this.idConversation);
     });
   }
-
+  listUser() {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredUsers = this.users.filter((user: any) =>
+      user.name.toLowerCase().includes(term)
+    );
+    console.log(this.filteredUsers);
+  }
   ngOnInit(): void {
     this.idConnected = this.localStorage.getUserIdFromToken();
-    this.logiService.getUsers().subscribe((users) => {
+    this.logiService.getUsers(this.idConnected).subscribe((users) => {
       console.log(users);
       this.users = users;
     });
@@ -96,6 +104,18 @@ export class MessengerComponent implements OnInit, OnDestroy {
             messagesElem.scrollHeight - messagesElem.clientHeight;
         }
       });
+  }
+  getConversationByIdUser(idUser: any) {
+    console.log(idUser);
+    const users = [idUser, this.idConnected];
+    this.logiService.getConversationByIdUser(users).subscribe((res) => {
+      console.log(res);
+      if (res[0]?.id) {
+        this.getConversationById(res[0].id);
+      } else {
+        this.messages = null;
+      }
+    });
   }
   sendMessage() {
     let message = {

@@ -1,10 +1,10 @@
 <div class="container">
   <div class="app">
     <div class="head clearfix">
-      <span class="messages-notification">
+      <!-- <span class="messages-notification">
         <i class="fa fa-comments-o"></i>
         <span class="count">2</span>
-      </span>
+      </span> -->
       <span class="title">Messenger</span>
       <span class="create-new">
         <i class="fa fa-pencil-square-o"></i>
@@ -13,20 +13,31 @@
 
     <div class="search-bar">
       <i class="fa fa-search"></i>
-      <input type="text" class="ip-search" placeholder="Search" />
+      <input
+        type="text"
+        class="ip-search"
+        [(ngModel)]="searchTerm"
+        (input)="listUser()"
+        placeholder="Search"
+      />
+      <ul *ngFor="let user of filteredUsers">
+        <li (click)="getConversationByIdUser(user.id)">
+          {{ user.name }}
+        </li>
+      </ul>
     </div>
 
     <div class="body">
       <div class="friend-list clearfix">
         <ul *ngFor="let conversation of conversations">
-          <li (click)="getConversationById(conversation.id)">
-            <span class="messages">
+          <li (click)="getConversationById(conversation._id)">
+            <!-- <span class="messages">
               <span class="count">1</span>
-            </span>
+            </span> -->
             <img src="userImg.jpg" alt="" />
             <span class="name">
-              {{ conversation.participants[1].name }}
-              <span class="status"> Active 2h ago </span>
+              {{ conversation.participants[0].name }}
+              <!-- <span class="status"> Active 2h ago </span> -->
             </span>
           </li>
 

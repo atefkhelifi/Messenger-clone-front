@@ -23,8 +23,8 @@ export class LoginService {
   getUserById(idUser: any): Observable<any> {
     return this.http.get<any>(this.apiUrlUsers + '/' + idUser);
   }
-  getUsers(): Observable<any> {
-    return this.http.get<any>(this.apiUrlUsers);
+  getUsers(userId: any): Observable<any> {
+    return this.http.get<any>(this.apiUrlUsers + '/users/' + userId);
   }
   getMyConversations(idUser: any): Observable<any> {
     return this.http.get<any>(
@@ -33,6 +33,11 @@ export class LoginService {
   }
   getConversationById(idConversation: any): Observable<any> {
     return this.http.get<any>(this.apiUrlConversations + '/' + idConversation);
+  }
+  getConversationByIdUser(idUser: any): Observable<any> {
+    return this.http.get<any>(
+      this.apiUrlConversations + '/conversation/' + idUser
+    );
   }
   getPaticipants(idConversation: any): Observable<any> {
     return this.http.get<any>(
