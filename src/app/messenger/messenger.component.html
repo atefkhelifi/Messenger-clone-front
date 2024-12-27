@@ -20,8 +20,10 @@
         (input)="listUser()"
         placeholder="Search"
       />
-      <ul *ngFor="let user of filteredUsers">
-        <li (click)="getConversationByIdUser(user.id)">
+    </div>
+    <div class="listUser">
+      <ul class="list-group" *ngFor="let user of filteredUsers">
+        <li class="list-group-item" (click)="getConversationByIdUser(user.id)">
           {{ user.name }}
         </li>
       </ul>
@@ -95,7 +97,7 @@
               [(ngModel)]="message"
             />
             <span class="btn-group">
-              <i class="bi bi-send" (click)="sendMessage()"></i>
+              <i class="bi bi-send" (click)="sendMsg()"></i>
               <!-- <i class="bi bi-paperclip"></i> -->
             </span>
           </div>
